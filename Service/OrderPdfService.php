@@ -396,9 +396,16 @@ class OrderPdfService extends AbstractFPDIService
             $orderDate = $Order->getOrderDate()->format('Y/m/d H:i');
         }
 
-        $this->lfText(25, 125, $orderDate , 10);
+        $this->lfText(25, 126, $orderDate , 10);
         //注文番号
-        $this->lfText(25, 135, $Order->getId(), 10);
+        $this->lfText(25, 136, $Order->getId(), 10);
+        $number = $this->app['eccube.plugin.order_number.repository.order_number']->findOneBy(array(
+            'order_id' => $Order->getId()
+        ));
+        if (!is_null($number)) {
+            //$this->lfText(20,140,'[注文番号]',10);
+            $this->lfText(25,147,$number->getOrderNumber(),10);
+        }
 
         // 総合計金額
         $this->SetFont(self::FONT_SJIS, 'B', 15);

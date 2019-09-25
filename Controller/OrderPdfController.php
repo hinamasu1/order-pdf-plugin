@@ -50,6 +50,8 @@ class OrderPdfController extends AbstractController
             return $app->redirect($app->url('admin_order'));
         }
 
+        $numbers = $this->getNumbers($request,$app);
+
         /* @var OrderPdfRepository $repos */
         $repos = $app['orderpdf.repository.order_pdf'];
 
@@ -74,6 +76,7 @@ class OrderPdfController extends AbstractController
 
         // Formへの設定
         $form->get('ids')->setData(implode(',', $ids));
+        $form->get('numbers')->setData(implode(',',$numbers));
 
         return $app->render('OrderPdf/Resource/template/admin/order_pdf.twig', array(
             'form' => $form->createView(),
@@ -189,5 +192,21 @@ class OrderPdfController extends AbstractController
         sort($isList);
 
         return $isList;
+    }
+
+    protected function getNumbers(Request $request,$app)
+    {
+        $numbers = array();
+        $ids = $this->getIds($request);
+        foreach ($ids as $value) {
+            $temp = $app['eccube.plugin.order_number.repository.order_number']->findOneBy(array(
+                'order_id' => $value
+            ));
+            if (!is_null($temp)) {
+                $numbers[] = $temp->getOrderNumber();
+            }
+        }
+
+        return $numbers;
     }
 }

@@ -22,6 +22,8 @@ class OrderPdf extends AbstractEntity
      */
     private $ids;
 
+    private $numbers;
+
     /**
      * @var int
      */
@@ -109,6 +111,17 @@ class OrderPdf extends AbstractEntity
     public function getIds()
     {
         return $this->ids;
+    }
+
+    public function setNumbers($numbers)
+    {
+        $this->numbers = $numbers;
+        return $this;
+    }
+
+    public function getNumbers()
+    {
+        return $this->numbers;
     }
 
     /**

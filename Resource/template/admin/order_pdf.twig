@@ -48,6 +48,13 @@
                                 {{ form_errors(form.ids) }}
                             </div>
                         </div>
+                        <div class="form-group">
+                            {{ form_label(form.numbers) }}
+                            <div class="col-sm-9 col-lg-10">
+                                {{ form_widget(form.numbers) }}
+                                {{ form_errors(form.numbers) }}
+                            </div>
+                        </div>
                         {#帳票タイトル#}
                         <div class="form-group">
                             {{ form_label(form.title) }}

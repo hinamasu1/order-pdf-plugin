@@ -51,12 +51,20 @@ class OrderPdfType extends AbstractType
         $app = $this->app;
         $builder
             ->add('ids', 'text', array(
-                'label' => '注文番号',
+                'label' => '注文ID',
                 'required' => false,
                 'attr' => array('readonly' => 'readonly'),
                 'constraints' => array(
                     new Assert\NotBlank(),
                 ),
+            ))
+            ->add('numbers', 'text', array(
+                'label' => '注文番号',
+                'required' => false,
+                'attr' => array('readonly' => 'readonly'),
+                //'constraints' => array(
+                //    new Assert\NotBlank(),
+                //),
             ))
             ->add('issue_date', 'date', array(
                 'label' => '発行日',
